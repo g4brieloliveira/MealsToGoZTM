@@ -1,20 +1,36 @@
 import React from "react";
-import { Text } from "react-native";
+import star from "../../../../../assets/star.png";
+import starEmpty from "../../../../../assets/star-empty.png";
 
-import { Title, CardView, CardImage, CardContent, Content } from "./styles";
+import {
+  Title,
+  CardView,
+  CardImage,
+  CardContent,
+  Content,
+  Description,
+  Rating,
+  Star,
+  Closed,
+  ClosedView,
+  Open,
+  OpenView,
+} from "./styles";
 
 export const RestaurantInfo = ({ restaurant = {} }) => {
   const {
     name = "Restaurante X",
-    icon,
     photos = [
       "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     ],
     address = "Rua X, numero XX",
     isOpenNow = true,
-    rating = 4,
+    rating = 3,
     isClosedTemporarily = false,
   } = restaurant;
+
+  const ratingArray = Array.from(new Array(Math.floor(rating)));
+  const ratingEmptyArray = Array.from(new Array(Math.ceil(5 - rating)));
 
   return (
     <>
@@ -23,18 +39,39 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
         <CardContent>
           <Content>
             <Title>{name}</Title>
-            <Text>{rating}</Text>
+            <Rating>
+              <>
+                {ratingArray.map(() => (
+                  <Star source={star} />
+                ))}
+                {ratingEmptyArray.map(() => (
+                  <Star source={starEmpty} />
+                ))}
+              </>
+            </Rating>
           </Content>
 
           <Content>
-            <Text>{address}</Text>
-            <Text>
+            <Description>{address}</Description>
+            <Description>
               {isClosedTemporarily ? (
-                "Fechado Temporariamente"
+                <ClosedView>
+                  <Closed>Fechado Temporariamente</Closed>
+                </ClosedView>
               ) : (
-                <>{isOpenNow ? "Aberto" : "Fechado"}</>
+                <>
+                  {isOpenNow ? (
+                    <OpenView>
+                      <Open>Aberto</Open>
+                    </OpenView>
+                  ) : (
+                    <ClosedView>
+                      <Closed>Fechado</Closed>
+                    </ClosedView>
+                  )}
+                </>
               )}
-            </Text>
+            </Description>
           </Content>
         </CardContent>
       </CardView>

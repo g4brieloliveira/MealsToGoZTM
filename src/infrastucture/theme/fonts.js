@@ -1,7 +1,8 @@
 export const fonts = {
-  body: "Oswald_400Regular",
-  heading: "Lato_400Regular",
-  monospace: "Oswald_400Regular",
+  title: "Poppins_600SemiBold",
+  body: "Poppins_400Regular",
+  heading: "Rajdhani_400Regular",
+  monospace: "Inter_400Regular",
 };
 
 export const fontWeights = {

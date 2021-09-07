@@ -10,9 +10,11 @@ export const RestaurantsScreen = () => {
       <SearchView>
         <Searchbar placeholder="Pesquise restaurantes aqui..." />
       </SearchView>
-      <ListView>
-        <RestaurantInfo />
-      </ListView>
+      <ListView
+        data={[{ name: 1 }, { name: 2 }, { name: 3 }, { name: 4 }]}
+        renderItem={() => <RestaurantInfo />}
+        keyExtractor={(item) => item.name}
+      />
     </Container>
   );
 };

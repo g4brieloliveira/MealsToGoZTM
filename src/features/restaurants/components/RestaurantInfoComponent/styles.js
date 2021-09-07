@@ -27,6 +27,7 @@ export const Rating = styled.View`
 
 export const CardView = styled(Card)`
   background-color: ${(props) => props.theme.colors.bg.primary};
+  margin-bottom: ${(props) => props.theme.space[3]};
 `;
 
 export const CardImage = styled(Card.Cover)``;
@@ -52,7 +53,7 @@ export const Closed = styled.Text`
 `;
 
 export const ClosedView = styled.View`
-  background-color: ${(props) => props.theme.colors.ui.error}33;
+  background-color: ${(props) => props.theme.colors.ui.error}22;
   border: 1px solid ${(props) => props.theme.colors.ui.error};
   border-radius: ${(props) => props.theme.sizes[0]};
 `;
@@ -66,7 +67,7 @@ export const Open = styled.Text`
 `;
 
 export const OpenView = styled.View`
-  background-color: ${(props) => props.theme.colors.ui.success}33;
+  background-color: ${(props) => props.theme.colors.ui.success}22;
   border: 1px solid ${(props) => props.theme.colors.ui.success};
   border-radius: ${(props) => props.theme.sizes[0]};
 `;

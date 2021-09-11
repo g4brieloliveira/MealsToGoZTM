@@ -23,10 +23,10 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
     photos = [
       "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     ],
-    address = "Rua X, numero XX",
+    address = restaurant.vicinity,
     isOpenNow = true,
     rating = 4,
-    isClosedTemporarily = true,
+    isClosedTemporarily = false,
   } = restaurant;
 
   const ratingArray = Array.from(new Array(Math.floor(rating)));

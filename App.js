@@ -1,5 +1,6 @@
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import React from "react";
+import { RestaurantsContextProvider } from "./src/services/restaurantServices/restaurants-context";
 import { Text, View } from "react-native";
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infrastucture/theme";
@@ -70,52 +71,52 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <NavigationContainer>
-          <Tab.Navigator
-            screenOptions={({ route }) => ({
-              tabBarIcon: ({ focused, color, size }) => {
-                let iconName;
+        <RestaurantsContextProvider>
+          <NavigationContainer>
+            <Tab.Navigator
+              screenOptions={({ route }) => ({
+                tabBarIcon: ({ focused, color, size }) => {
+                  let iconName;
 
-                if (route.name === "Restaurantes") {
-                  iconName = focused
-                    ? "md-restaurant"
-                    : "md-restaurant-outline";
-                } else if (route.name === "Mapa") {
-                  iconName = focused ? "md-map" : "md-map-outline";
-                } else if (route.name === "Configurações") {
-                  iconName = focused ? "md-settings" : "md-settings-outline";
-                }
-
-                // You can return any component that you like here!
-                return <Ionicons name={iconName} size={size} color={color} />;
-              },
-              tabBarActiveTintColor: "tomato",
-              tabBarInactiveTintColor: "gray",
-            })}
-          >
-            <Tab.Screen
-              name="Restaurantes"
-              component={RestaurantsScreen}
-              options={{
-                headerShown: false,
-              }}
-            />
-            <Tab.Screen
-              name="Mapa"
-              component={HomeScreen}
-              options={{
-                headerShown: false,
-              }}
-            />
-            <Tab.Screen
-              name="Configurações"
-              component={SettingsScreen}
-              options={{
-                headerShown: false,
-              }}
-            />
-          </Tab.Navigator>
-        </NavigationContainer>
+                  if (route.name === "Restaurantes") {
+                    iconName = focused
+                      ? "md-restaurant"
+                      : "md-restaurant-outline";
+                  } else if (route.name === "Mapa") {
+                    iconName = focused ? "md-map" : "md-map-outline";
+                  } else if (route.name === "Configurações") {
+                    iconName = focused ? "md-settings" : "md-settings-outline";
+                  }
+                  return <Ionicons name={iconName} size={size} color={color} />;
+                },
+                tabBarActiveTintColor: "tomato",
+                tabBarInactiveTintColor: "gray",
+              })}
+            >
+              <Tab.Screen
+                name="Restaurantes"
+                component={RestaurantsScreen}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Tab.Screen
+                name="Mapa"
+                component={HomeScreen}
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Tab.Screen
+                name="Configurações"
+                component={SettingsScreen}
+                options={{
+                  headerShown: false,
+                }}
+              />
+            </Tab.Navigator>
+          </NavigationContainer>
+        </RestaurantsContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>

@@ -3,7 +3,7 @@ import { Searchbar, ActivityIndicator } from "react-native-paper";
 import { RestaurantInfo } from "../../components/RestaurantInfoComponent";
 import { RestaurantsContext } from "../../../../services/restaurantServices/restaurants-context";
 
-import { Container, ListView, SearchView } from "./styles";
+import { Container, ListView, SearchView, IsLoadingView } from "./styles";
 import { Text } from "react-native";
 
 export const RestaurantsScreen = () => {
@@ -15,7 +15,9 @@ export const RestaurantsScreen = () => {
         <Searchbar placeholder="Pesquise restaurantes aqui..." />
       </SearchView>
       {isLoading ? (
-        <ActivityIndicator />
+        <IsLoadingView>
+          <ActivityIndicator animating={true} size={50} />
+        </IsLoadingView>
       ) : error ? (
         <Text>{error}</Text>
       ) : (

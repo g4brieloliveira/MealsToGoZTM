@@ -17,3 +17,10 @@ export const ListView = styled.FlatList.attrs({
 })`
   flex: 1;
 `;
+
+export const IsLoadingView = styled.View`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -25px;
+`;

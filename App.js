@@ -1,15 +1,10 @@
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import React from "react";
 import { RestaurantsContextProvider } from "./src/services/restaurantServices/restaurants-context";
-import { Text, View } from "react-native";
+import { LocationContextProvider } from "./src/services/location/location-context";
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infrastucture/theme";
-import { Ionicons } from "@expo/vector-icons";
-
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
-import { RestaurantsScreen } from "./src/features/restaurants/screens/RestaurantInfoScreen";
+import { Navigation } from "./src/infrastucture/navigation";
 
 import {
   useFonts as useInter,
@@ -33,24 +28,6 @@ import {
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
 
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Map!</Text>
-    </View>
-  );
-}
-
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
-
-const Tab = createBottomTabNavigator();
-
 export default function App() {
   const [interLoaded] = useInter({ Inter_400Regular });
 
@@ -71,52 +48,11 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <RestaurantsContextProvider>
-          <NavigationContainer>
-            <Tab.Navigator
-              screenOptions={({ route }) => ({
-                tabBarIcon: ({ focused, color, size }) => {
-                  let iconName;
-
-                  if (route.name === "Restaurantes") {
-                    iconName = focused
-                      ? "md-restaurant"
-                      : "md-restaurant-outline";
-                  } else if (route.name === "Mapa") {
-                    iconName = focused ? "md-map" : "md-map-outline";
-                  } else if (route.name === "Configurações") {
-                    iconName = focused ? "md-settings" : "md-settings-outline";
-                  }
-                  return <Ionicons name={iconName} size={size} color={color} />;
-                },
-                tabBarActiveTintColor: "tomato",
-                tabBarInactiveTintColor: "gray",
-              })}
-            >
-              <Tab.Screen
-                name="Restaurantes"
-                component={RestaurantsScreen}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Tab.Screen
-                name="Mapa"
-                component={HomeScreen}
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Tab.Screen
-                name="Configurações"
-                component={SettingsScreen}
-                options={{
-                  headerShown: false,
-                }}
-              />
-            </Tab.Navigator>
-          </NavigationContainer>
-        </RestaurantsContextProvider>
+        <LocationContextProvider>
+          <RestaurantsContextProvider>
+            <Navigation />
+          </RestaurantsContextProvider>
+        </LocationContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>

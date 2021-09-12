@@ -2,12 +2,14 @@ import styled from "styled-components";
 import { Card } from "react-native-paper";
 
 export const Title = styled.Text`
+  width: 65%;
   font-family: ${(props) => props.theme.fonts.title};
   font-size: ${(props) => props.theme.fontSizes.button};
   color: ${(props) => props.theme.colors.ui.primary};
 `;
 
 export const Description = styled.Text`
+  width: 50%;
   font-family: ${(props) => props.theme.fonts.heading};
   color: ${(props) => props.theme.colors.ui.primary};
 `;
@@ -40,7 +42,7 @@ export const CardContent = styled(Card.Content)`
 export const Content = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: ${(props) => props.theme.space[1]};
 `;
 

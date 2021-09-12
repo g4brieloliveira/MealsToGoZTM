@@ -27,6 +27,7 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
     isOpenNow = true,
     rating = 4,
     isClosedTemporarily = false,
+    placeId,
   } = restaurant;
 
   const ratingArray = Array.from(new Array(Math.floor(rating)));
@@ -41,11 +42,11 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
             <Title>{name}</Title>
             <Rating>
               <>
-                {ratingArray.map(() => (
-                  <Star source={star} />
+                {ratingArray.map((_, i) => (
+                  <Star key={`star-${placeId}-${i}`} source={star} />
                 ))}
-                {ratingEmptyArray.map(() => (
-                  <Star source={starEmpty} />
+                {ratingEmptyArray.map((_, i) => (
+                  <Star key={`star-${placeId}-${i}`} source={starEmpty} />
                 ))}
               </>
             </Rating>
@@ -53,7 +54,7 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
 
           <Content>
             <Description>{address}</Description>
-            <Description>
+            <Content>
               {isClosedTemporarily ? (
                 <ClosedView>
                   <Closed>Fechado Temporariamente</Closed>
@@ -71,7 +72,7 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
                   )}
                 </>
               )}
-            </Description>
+            </Content>
           </Content>
         </CardContent>
       </CardView>

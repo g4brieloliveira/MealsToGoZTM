@@ -1,19 +1,18 @@
 import React, { useContext } from "react";
-import { Searchbar, ActivityIndicator } from "react-native-paper";
+import { ActivityIndicator } from "react-native-paper";
 import { RestaurantInfo } from "../../components/RestaurantInfoComponent";
 import { RestaurantsContext } from "../../../../services/restaurantServices/restaurants-context";
 
-import { Container, ListView, SearchView, IsLoadingView } from "./styles";
-import { Text } from "react-native";
+import { Container, ListView, IsLoadingView } from "./styles";
+import { Text, TouchableOpacity } from "react-native";
+import { Search } from "../../components/SearchComponent";
 
-export const RestaurantsScreen = () => {
+export const RestaurantsScreen = ({ navigation }) => {
   const { isLoading, error, restaurants } = useContext(RestaurantsContext);
 
   return (
     <Container>
-      <SearchView>
-        <Searchbar placeholder="Pesquise restaurantes aqui..." />
-      </SearchView>
+      <Search />
       {isLoading ? (
         <IsLoadingView>
           <ActivityIndicator animating={true} size={50} />
@@ -24,7 +23,18 @@ export const RestaurantsScreen = () => {
         <ListView
           data={restaurants}
           renderItem={({ item }) => {
-            return <RestaurantInfo restaurant={item} />;
+            return (
+              <TouchableOpacity
+                activeOpacity={0.6}
+                onPress={() =>
+                  navigation.navigate("RestaurantsDetail", {
+                    restaurant: item,
+                  })
+                }
+              >
+                <RestaurantInfo restaurant={item} />
+              </TouchableOpacity>
+            );
           }}
           keyExtractor={(item) => item.name}
         />

@@ -16,6 +16,7 @@ import {
   Open,
   OpenView,
 } from "./styles";
+import { Favourite } from "../../../../components/favourites";
 
 export const RestaurantInfo = ({ restaurant = {} }) => {
   const {
@@ -36,6 +37,7 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
   return (
     <>
       <CardView elevation={5}>
+        <Favourite restaurant={restaurant} />
         <CardImage source={{ uri: photos[0] }} />
         <CardContent>
           <Content>

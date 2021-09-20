@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView } from "react-native";
 import { List } from "react-native-paper";
 import { RestaurantInfo } from "../../components/RestaurantInfoComponent";
 

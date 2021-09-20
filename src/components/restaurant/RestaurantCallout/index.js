@@ -23,14 +23,14 @@ const Item = styled.View`
 
 export const Title = styled.Text`
   font-family: ${(props) => props.theme.fonts.title};
-  font-size: ${(props) => props.theme.fontSizes.button};
+  font-size: ${(props) => props.theme.fontSizes.caption};
   color: ${(props) => props.theme.colors.ui.primary};
 `;
 
 const isAndroid = Platform.OS === "android";
 
-export const CompactRestaurantInfo = ({ restaurant }) => {
-  const Image = isAndroid ? CompactWebview : CompactImage;
+export const CompactRestaurantInfo = ({ restaurant, isMap }) => {
+  const Image = isAndroid && isMap ? CompactWebview : CompactImage;
 
   return (
     <Item>

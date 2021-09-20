@@ -16,7 +16,7 @@ import {
   Open,
   OpenView,
 } from "./styles";
-import { Favourite } from "../../../../components/favourites";
+import { Favourite } from "../../../../components/favourites/FavouritesButton";
 
 export const RestaurantInfo = ({ restaurant = {} }) => {
   const {

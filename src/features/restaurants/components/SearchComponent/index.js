@@ -4,7 +4,7 @@ import { SearchView } from "./styles";
 
 import { LocationContext } from "../../../../services/location/location-context";
 
-export const Search = () => {
+export const Search = ({ isToggled, onToggle }) => {
   const { keyword, search } = useContext(LocationContext);
   const [searchKeyword, setSearchKeyword] = useState(keyword);
 
@@ -16,7 +16,8 @@ export const Search = () => {
       <Searchbar
         placeholder="Pesquise restaurantes aqui..."
         value={searchKeyword}
-        icon="food-apple-outline"
+        icon={isToggled ? "heart" : "heart-outline"}
+        onIconPress={() => onToggle(isToggled)}
         onSubmitEditing={() => {
           search(searchKeyword);
         }}

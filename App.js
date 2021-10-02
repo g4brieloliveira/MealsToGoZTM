@@ -1,13 +1,11 @@
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
-import React, { useState, useEffect } from "react";
-import { RestaurantsContextProvider } from "./src/services/restaurantServices/restaurants-context";
-import { LocationContextProvider } from "./src/services/location/location-context";
-import { FavouritesContextProvider } from "./src/services/favourites/favourites-context";
+import React from "react";
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infrastucture/theme";
-import { Navigation } from "./src/infrastucture/navigation";
-import firebase from "firebase/app";
+import * as firebase from "firebase";
 require("firebase/auth");
+
+import { Navigation } from "./src/infrastucture/navigation";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDool9gZNOSmyEOTVg_GHRlMK-bGpJjDpI",
@@ -44,22 +42,12 @@ import {
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
 
-export default function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  useEffect(() => {
-    setTimeout(() => {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword("email@gmail.com", "password")
-        .then((user) => {
-          setIsAuthenticated(true);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }, 2000);
-  }, []);
+import { AuthenticationContextProvider } from "./src/services/authentication/authentication-context";
+import { FavouritesContextProvider } from "./src/services/favourites/favourites-context";
+import { LocationContextProvider } from "./src/services/location/location-context";
+import { RestaurantsContextProvider } from "./src/services/restaurantServices/restaurants-context";
 
+export default function App() {
   const [interLoaded] = useInter({ Inter_400Regular });
   const [rajdhaniLoaded] = useRajdhani({ Rajdhani_400Regular });
   const [oswaldLoaded] = useOswald({ Oswald_400Regular });
@@ -72,20 +60,18 @@ export default function App() {
     return null;
   }
 
-  if (!isAuthenticated) {
-    return null;
-  }
-
   return (
     <>
       <ThemeProvider theme={theme}>
-        <FavouritesContextProvider>
-          <LocationContextProvider>
-            <RestaurantsContextProvider>
-              <Navigation />
-            </RestaurantsContextProvider>
-          </LocationContextProvider>
-        </FavouritesContextProvider>
+        <AuthenticationContextProvider>
+          <FavouritesContextProvider>
+            <LocationContextProvider>
+              <RestaurantsContextProvider>
+                <Navigation />
+              </RestaurantsContextProvider>
+            </LocationContextProvider>
+          </FavouritesContextProvider>
+        </AuthenticationContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>

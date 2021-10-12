@@ -9,12 +9,23 @@ export const AuthenticationContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
+  const [message, setMessage] = useState("");
+
+  firebase.auth().onAuthStateChanged((usr) => {
+    if (usr) {
+      setUser(usr);
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
+    }
+  });
 
   const onLogin = (email, password) => {
     setIsLoading(true);
     loginRequest(email, password)
       .then((u) => {
         setUser(u);
+        setMessage("Login feito com sucesso!");
         setIsLoading(false);
       })
       .catch((e) => {
@@ -23,7 +34,13 @@ export const AuthenticationContextProvider = ({ children }) => {
       });
   };
 
+  const onLogout = () => {
+    setUser(null);
+    firebase.auth().signOut();
+  };
+
   const onRegister = (email, password, repeatedPassword) => {
+    setIsLoading(true);
     if (password !== repeatedPassword) {
       setError("Erro: Utilize a mesma senha em ambos os campos!");
       return;
@@ -34,6 +51,7 @@ export const AuthenticationContextProvider = ({ children }) => {
       .createUserWithEmailAndPassword(email, password)
       .then((u) => {
         setUser(u);
+        setMessage("Registrado com sucesso!");
         setIsLoading(false);
       })
       .catch((e) => {
@@ -49,7 +67,9 @@ export const AuthenticationContextProvider = ({ children }) => {
         user,
         isLoading,
         error,
+        message,
         onLogin,
+        onLogout,
         onRegister,
       }}
     >

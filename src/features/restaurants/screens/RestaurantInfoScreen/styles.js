@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { StatusBar as RNStatusBar } from "react-native";
+import { Snackbar } from "react-native-paper";
 
 export const Container = styled.SafeAreaView`
   flex: 1;
@@ -23,4 +24,8 @@ export const IsLoadingView = styled.View`
   top: 50%;
   left: 50%;
   margin-left: -25px;
+`;
+
+export const Success = styled(Snackbar)`
+  background-color: #0f0;
 `;

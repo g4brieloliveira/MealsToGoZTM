@@ -36,3 +36,7 @@ export const BackButton = styled(IconButton).attrs({
 export const Error = styled(Snackbar)`
   background-color: #f00;
 `;
+
+export const Success = styled(Snackbar)`
+  background-color: #0f0;
+`;

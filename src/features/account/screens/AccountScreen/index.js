@@ -14,7 +14,7 @@ export const AccountScreen = ({ navigation }) => {
       <Container>
         <Title>Meals To Go</Title>
         <AuthButton
-          icon="lock-open-outline"
+          icon="login"
           mode="outlined"
           onPress={() => navigation.navigate("Login")}
         >

@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import { IconButton, Colors } from "react-native-paper";
 
 import {
   AccountBackground,
@@ -19,16 +18,21 @@ import { AuthenticationContext } from "../../../../services/authentication/authe
 export const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const [visible, setVisible] = React.useState(false);
-  const onDismissSnackBar = () => setVisible(false);
+  const [newError, setNewError] = useState("");
 
   const { onLogin, error, isLoading } = useContext(AuthenticationContext);
 
+  const [visible, setVisible] = useState(false);
+
+  const onDismissSnackBar = () => {
+    setVisible(false);
+  };
+
   const handleLogin = async () => {
     await onLogin(email, password);
+    setNewError(error);
 
-    setVisible(true);
+    error !== newError ? setVisible(true) : null;
   };
 
   return (
@@ -56,11 +60,10 @@ export const LoginScreen = ({ navigation }) => {
           textContentType="password"
           secureTextEntry
           autoCapitalize="none"
-          secure
           onChangeText={(text) => setPassword(text)}
         />
         <LoginButton
-          icon="lock-open-outline"
+          icon="login"
           mode="outlined"
           loading={isLoading ? true : false}
           disabled={isLoading ? true : false}
@@ -69,11 +72,11 @@ export const LoginScreen = ({ navigation }) => {
           Fazer login
         </LoginButton>
       </Container>
-      {error && (
+      {error !== newError ? (
         <Error duration={2500} visible={visible} onDismiss={onDismissSnackBar}>
           {error}
         </Error>
-      )}
+      ) : null}
     </AccountBackground>
   );
 };

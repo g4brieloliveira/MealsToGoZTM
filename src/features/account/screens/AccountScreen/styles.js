@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { Button } from "react-native-paper";
 import { colors } from "../../../../infrastucture/theme/colors";
-import { space } from "../../../../infrastucture/theme/spacing";
 
 export const Container = styled.View`
   background-color: rgba(255, 255, 255, 0.7);

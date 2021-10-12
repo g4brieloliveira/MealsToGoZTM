@@ -28,3 +28,11 @@ export const Title = styled.Text`
 
   margin-bottom: ${(props) => props.theme.space[3]};
 `;
+
+export const WatermelonWrapper = styled.View`
+  width: 100%;
+  height: 40%;
+  position: absolute;
+  top: 3px;
+  padding: ${(props) => props.theme.space[2]};
+`;

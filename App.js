@@ -43,9 +43,6 @@ import {
 } from "@expo-google-fonts/oswald";
 
 import { AuthenticationContextProvider } from "./src/services/authentication/authentication-context";
-import { FavouritesContextProvider } from "./src/services/favourites/favourites-context";
-import { LocationContextProvider } from "./src/services/location/location-context";
-import { RestaurantsContextProvider } from "./src/services/restaurantServices/restaurants-context";
 
 export default function App() {
   const [interLoaded] = useInter({ Inter_400Regular });
@@ -64,13 +61,7 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <AuthenticationContextProvider>
-          <FavouritesContextProvider>
-            <LocationContextProvider>
-              <RestaurantsContextProvider>
-                <Navigation />
-              </RestaurantsContextProvider>
-            </LocationContextProvider>
-          </FavouritesContextProvider>
+          <Navigation />
         </AuthenticationContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
